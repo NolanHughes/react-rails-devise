@@ -15,6 +15,7 @@ var Signup = React.createClass({
         password_confirmation: document.getElementById("password_confirmation").value
       }
     }
+
     $.ajax({
       type: "POST",
       url: "http://localhost:3000/users",
@@ -22,6 +23,7 @@ var Signup = React.createClass({
       data: userInfo,
       error: function (error) {
         that.updateSignupError()
+        console.log(error)
       },
       success: function (res) {
         that.props.changePage("edit");
@@ -36,8 +38,9 @@ var Signup = React.createClass({
     });
   },
 
-  render: function() {
+  render() {
     var errorClass = this.state.signupUnsuccessful ? "" : "hidden"
+
     return (
       <div>
         <h2>Signup</h2>
@@ -47,9 +50,9 @@ var Signup = React.createClass({
           <input id="password_confirmation" placeholder="retype password"/>
           <button onClick={this.handleSignup}>Submit</button>
         </form>
-        <p className={errorClass}>There was an error with your signup details</p>
+        <p className={errorClass}>There was an error with your signup details. Try going to the login page</p>
         <button onClick={() => this.props.changePage("login")}>Login!</button>
       </div>
-    );
-  };
+    )
+  }
 });

@@ -37,6 +37,7 @@ var Login = React.createClass({
 
   render() {
     var errorClass = this.state.loginUnsuccessful ? "" : "hidden"
+
     return (
       <div>
         <h2>Login</h2>
@@ -48,6 +49,6 @@ var Login = React.createClass({
         <p className={errorClass}>There was an error with your login details</p>
         <button onClick={() => this.props.changePage("signup")}>Sign Up!</button>
       </div>
-    );
-  };
+    )
+  }
 });

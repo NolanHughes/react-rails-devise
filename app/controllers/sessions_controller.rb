@@ -1,6 +1,4 @@
 class SessionsController < Devise::SessionsController
-
-  # POST /v1/login
   def create
     @user = User.find_by_email(user_params[:email])
     return invalid_login_attempt unless @user
@@ -18,16 +16,14 @@ class SessionsController < Devise::SessionsController
     render :json=> {:success=>true}
   end
 
+  private
 
-    private
+  def invalid_login_attempt
+    warden.custom_failure!
+    render json: {error: 'invalid login attempt'}, status: :unprocessable_entity
+  end
 
-    def invalid_login_attempt
-      warden.custom_failure!
-      render json: {error: 'invalid login attempt'}, status: :unprocessable_entity
-    end
-
-    def user_params
-       params.require(:user).permit(:email, :password)
-    end
-
+  def user_params
+     params.require(:user).permit(:email, :password)
+  end
 end

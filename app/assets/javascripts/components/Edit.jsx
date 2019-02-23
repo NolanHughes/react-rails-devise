@@ -8,28 +8,30 @@ var Edit = React.createClass({
 
   handleUpdate(e) {
     e.preventDefault();
-    var that = this
-    var userInfo = {
+
+    let userInfo = {
       user: {
-        email: that.props.currentUser,
+        email: this.props.currentUser,
         password: document.getElementById("newPassword").value,
         password_confirmation: document.getElementById("confirmNewPassword").value,
       }
     }
+
     $.ajaxSetup({
        headers:
        { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content') }
     });
+
     $.ajax({
       type: "PUT",
       url: "http://localhost:3000/users",
       dataType: "json",
       data: userInfo,
       error: function (error) {
-        that.updateEdit("false");
+        this.updateEdit("false");
       },
       success: function (res) {
-        that.updateEdit("true");
+        this.updateEdit("true");
       },
     });
   },
@@ -62,9 +64,10 @@ var Edit = React.createClass({
     return {message: message, customClass: customClass};
   },
 
-  render: function() {
-    var errorClass = this.state.deleteUnsuccessful ? "" : "hidden"
-    var editData = this.getEditData()
+  render() {
+    let errorClass = this.state.deleteUnsuccessful ? "" : "hidden"
+    let editData = this.getEditData()
+
     return (
       <div>
         <h2>Edit Account</h2>
@@ -78,6 +81,6 @@ var Edit = React.createClass({
         <Delete changePage={this.props.changePage} updateDeleteError={this.updateDeleteError} currentUser={this.props.currentUser}/>
         <p className={errorClass}>Your account could not be deleted</p>
       </div>
-    );
-  };
+    )
+  }
 });

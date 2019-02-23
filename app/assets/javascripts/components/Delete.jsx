@@ -19,11 +19,17 @@ var Delete = React.createClass({
         that.props.changePage("login");
       },
     });
-},
+  },
 
-  render: function() {
+  render() {
     return (
       <button onClick={this.handleDelete}>Delete Account</button>
-    );
-  };
+    )
+  }
+
+  // render: function() {
+  //   return (
+  //     <button onClick={this.handleDelete}>Delete Account</button>
+  //   );
+  // };
 });

@@ -16,9 +16,9 @@ var Logout = React.createClass({
     });
   },
 
-  render: function() {
+  render() {
     return (
       <button onClick={this.handleLogout}>Sign Out</button>
-    );
-  };
+    )
+  }
 });
